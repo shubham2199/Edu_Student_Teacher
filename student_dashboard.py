@@ -64,7 +64,7 @@ def student_main():
                 st.rerun() 
     else:
         row = df[df["student_id"].astype(str) == st.session_state.student_id].iloc[0]
-        st.title(f"🎓 {row.student_name}'s Dashboard")
+        st.title(f"🎓 {row.student_id} : {row.student_name}'s Dashboard")
                 
         rdata = row.copy()
         for col, le in encoders.items():

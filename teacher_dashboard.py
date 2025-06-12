@@ -11,6 +11,10 @@ load_dotenv()
 
 
 feedback_path = os.getenv("FEEDBACK_FILE")
+MATH = os.getenv("MATH")
+SCIENCE = os.getenv("SCIENCE")
+ENGLISH = os.getenv("ENGLISH")
+HISTORY = os.getenv("HISTORY")
 
 @st.cache_resource
 def load_data():
@@ -45,10 +49,10 @@ def teacher_main():
     if not st.session_state.get("authenticated", False):
         st.title("👩‍🏫 Teacher Login")
         subjects = {
-            "math": "math_pass",
-            "science": "science_pass",
-            "english": "english_pass",
-            "history": "history_pass"
+            "math": MATH,
+            "science": SCIENCE,
+            "english": ENGLISH,
+            "history": HISTORY
         }
         sub = st.selectbox("Select Subject wise Teacher", list(subjects.keys()))
         pw = st.text_input("Password", type="password")
@@ -86,6 +90,7 @@ def teacher_main():
         if not student_row.empty:
             student_row = student_row.iloc[0]
             sub_score = student_row[sub_col]
+            st.write(f"🆔 Student ID: **{student_row['student_id']}**")
             st.write(f"🧑 Student Name: **{student_row['student_name']}**")
             st.write(f"📊 {st.session_state.teacher_subject.capitalize()} Marks: **{sub_score}**")
 
